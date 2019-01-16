@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html lang="pt_BR">
+<head>
+  <meta charset="utf-8">
+  <title>FutData</title>
+  <meta name="description" content="FutData - Principais dados sobre o competições de futebol brasileiras">
+  <meta name="author" content="Luís Fernando Guedes">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+</head>
+
+<body>
+  <div>
+    <main />
+  </div>
+  <script src="src/layout/main.tag" type="riot/tag"></script>
+  <script src="src/layout/partials/navbar.tag" type="riot/tag"></script>
+  <script src="src/layout/partials/team-box.tag" type="riot/tag"></script>
+  <script src="src/layout/partials/last-results.tag" type="riot/tag"></script>
+  <script src="src/pages/home.tag" type="riot/tag"></script>
+  <script src="src/pages/team.tag" type="riot/tag"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/riot/3.13.1/riot+compiler.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/riot-view-router@0.1.4/dist/riot-view-router.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+  <script>
+    riot.mount('main')
+
+    const router = new Router(riot, {
+      debugging: true,
+      default: 'home',
+      fallback: '404',
+      href: 'http://localhost:8080'
+    })
+
+    router.add([
+      {
+        name: 'home',
+        route: '/',
+        tag: 'home',
+        title: 'FutData - Números, estatísticas e dados sobre times',
+        onEnter: (state) => {
+          console.log('Entering home')
+        }
+      },
+      {
+        name: 'team',
+        route: '/team/:name',
+        tag: 'team',
+        title: 'FutData - Números, estatísticas e dados sobre times',
+        onEnter: (state) => {
+          console.log('Entering team')
+        }
+      }
+    ])
+
+    router.start()
+  </script>
+</body>
+</html>
